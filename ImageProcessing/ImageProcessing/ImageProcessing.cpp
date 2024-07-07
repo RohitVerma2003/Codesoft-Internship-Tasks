@@ -196,6 +196,47 @@ Mat static cropImage(const Mat& img) {
     return croppedImage;
 }
 
+void static colorMap(Mat& img) {
+    cout << "-----------------------------" << endl;
+    cout << "Color Mapping" << endl;
+    cout << "1. Autumn" << endl;
+    cout << "2. Bone" << endl;
+    cout << "3. Cool" << endl;
+    cout << "4. DeepGreen" << endl;
+    cout << "5. Winter" << endl;
+    cout << "-----------------------------" << endl;
+
+    int choice = -1;
+    cout << "Your Choice : ";
+    cin >> choice;
+
+    switch (choice) {
+    case 1:
+        applyColorMap(img, img, COLORMAP_AUTUMN);
+        cout << "Color Map Applied" << endl;
+        break;
+    case 2:
+        applyColorMap(img, img, COLORMAP_BONE);
+        cout << "Color Map Applied" << endl;
+        break;
+    case 3:
+        applyColorMap(img, img, COLORMAP_COOL);
+        cout << "Color Map Applied" << endl;
+        break;
+    case 4:
+        applyColorMap(img, img, COLORMAP_DEEPGREEN);
+        cout << "Color Map Applied" << endl;
+        break;
+    case 5:
+        applyColorMap(img, img, COLORMAP_WINTER);
+        cout << "Color Map Applied" << endl;
+        break;
+    default:
+        cout << endl << "---- Invalid Choice ----" << endl;
+        break;
+    }
+}
+
 int main() {
     cv::utils::logging::setLogLevel(cv::utils::logging::LogLevel::LOG_LEVEL_SILENT);
 
@@ -214,8 +255,9 @@ int main() {
         cout << "7. Change the Contrast of the Image" << endl;
         cout << "8. Resize Image" << endl;
         cout << "9. Crop Image" << endl;
-        cout << "10. Save the Image" << endl;
-        cout << "11. End the Application" << endl;
+        cout << "10. Apply Color Map" << endl;
+        cout << "11. Save the Image" << endl;
+        cout << "12. End the Application" << endl;
         cout << "------------------------------------------------" << endl;
 
         cout << endl << "Enter Your Choice: ";
@@ -305,13 +347,21 @@ int main() {
             break;
         case 10:
             if (!img.empty()) {
-                saveImage(img);
+                colorMap(img);
             }
             else {
                 cout << "No image loaded. Please load an image first." << endl;
             }
             break;
         case 11:
+            if (!img.empty()) {
+                saveImage(img);
+            }
+            else {
+                cout << "No image loaded. Please load an image first." << endl;
+            }
+            break;
+        case 12:
             cout << "Ending the application." << endl;
             break;
         default:
@@ -319,7 +369,7 @@ int main() {
             break;
         }
 
-    } while (choice != 11);
+    } while (choice != 12);
 
     return 0;
 }
