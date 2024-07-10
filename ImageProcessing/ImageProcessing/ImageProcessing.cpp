@@ -10,7 +10,8 @@ using namespace cv;
 static string loadImage() {
     cout << "Enter the path of the Image: ";
     string newPath;
-    cin >> newPath;
+    cin.ignore();
+    getline(cin, newPath);
 
     if (cin.fail()) {
         cin.clear();
